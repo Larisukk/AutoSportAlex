@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../content/site';
+---
+
+<Layout title="Despre Noi" description="Află povestea Școlii de Șoferi AutoSport Alex din Slatina, misiunea și valorile noastre pentru o educație rutieră de excepție.">
+  <!-- Page Header -->
+  <div class="bg-autosport-navy-dark py-16 border-b border-autosport-border relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 bg-[linear-gradient(45deg,#ffffff_1px,transparent_1px),linear-gradient(-45deg,#ffffff_1px,transparent_1px)] bg-[length:20px_20px]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-text-on-dark mb-4">Despre Noi</h1>
+      <p class="text-xl text-text-muted max-w-2xl mx-auto">Experiență, siguranță și dedicare pentru fiecare cursant.</p>
+    </div>
+  </div>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <!-- Story / Text -->
+        <div>
+          <h2 class="text-autosport-red font-bold tracking-wide uppercase text-sm mb-2">Povestea AutoSport Alex</h2>
+          <h3 class="text-3xl font-bold text-autosport-navy mb-6">Misiunea noastră este să formăm șoferi responsabili și siguri pe ei.</h3>
+          
+          <div class="space-y-6 text-lg text-slate-600 leading-relaxed">
+            <p>
+              Înființată în inima orașului Slatina, <strong class="text-autosport-red">AutoSport Alex</strong> a pornit de la o idee simplă: educația rutieră trebuie să fie accesibilă, modernă și, mai presus de toate, făcută cu răbdare și profesionalism.
+            </p>
+            <p>
+              Nu ne propunem doar să te ajutăm să iei examenul pentru permis, ci ne dedicăm să te formăm ca un șofer responsabil, capabil să reacționeze corect în orice situație apărută în trafic. Siguranța ta și a celorlalți participanți la trafic este prioritatea noastră absolută.
+            </p>
+            <p>
+              Beneficiem de o bază materială modernă, inclusiv <strong>tablete, teste și chestionare auto actualizate la zi</strong>, pentru ca pregătirea ta teoretică să fie cât mai eficientă și interactivă. Oferim un mediu de învățare plăcut, unde fiecare cursant primește atenția necesară pentru a-și depăși emoțiile.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Values / Features -->
+        <div class="bg-slate-50 p-8 md:p-12 rounded-3xl border border-slate-100">
+          <h4 class="text-2xl font-bold text-autosport-navy mb-8">Valorile care ne ghidează</h4>
+          
+          <ul class="space-y-8">
+            <li class="flex">
+              <div class="flex-shrink-0 w-12 h-12 bg-red-100 text-autosport-red rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              </div>
+              <div class="ml-5">
+                <h5 class="text-xl font-semibold text-slate-800 mb-1">Siguranța pe primul loc</h5>
+                <p class="text-slate-600">Pregătire riguroasă pentru a preveni incidentele rutiere.</p>
+              </div>
+            </li>
+            
+            <li class="flex">
+              <div class="flex-shrink-0 w-12 h-12 bg-red-100 text-autosport-red rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+              </div>
+              <div class="ml-5">
+                <h5 class="text-xl font-semibold text-slate-800 mb-1">Educație modernă</h5>
+                <p class="text-slate-600">Folosim tehnologie pentru a preda eficient (tablete, simulări, teste auto).</p>
+              </div>
+            </li>
+            
+            <li class="flex">
+              <div class="flex-shrink-0 w-12 h-12 bg-red-100 text-autosport-red rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+              </div>
+              <div class="ml-5">
+                <h5 class="text-xl font-semibold text-slate-800 mb-1">Concentrare pe comunitate</h5>
+                <p class="text-slate-600">Mândri să formăm zeci de șoferi responsabili în fiecare an, în Slatina.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA section inside page -->
+  <section class="py-16 bg-autosport-navy-dark">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h3 class="text-3xl font-bold text-text-on-dark mb-6">Începe pregătirea alături de noi!</h3>
+      <a href="/contact" class="inline-block px-8 py-4 bg-autosport-red hover:bg-autosport-red-hover text-white font-bold rounded-lg shadow-sm transition-colors text-lg">
+        Contactează-ne pentru Înscriere
+      </a>
+    </div>
+  </section>
+</Layout>

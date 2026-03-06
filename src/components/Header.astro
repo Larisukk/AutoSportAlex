@@ -1,0 +1,116 @@
+---
+import { siteConfig } from '../content/site';
+
+const navLinks = [
+  { name: 'Prima pagină', path: '/' },
+  { name: 'Despre noi', path: '/despre-noi' },
+  { name: 'Instructori', path: '/instructori' },
+  { name: 'Galerie foto/video', path: '/galerie' },
+  { name: 'Contact', path: '/contact' },
+];
+
+const currentPath = Astro.url.pathname;
+const isActive = (path: string) => {
+  if (path === '/') return currentPath === '/';
+  return currentPath.startsWith(path);
+};
+---
+
+<header class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300" id="main-header">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-[72px]">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 group">
+        <img src="/images/logo.webp" alt="AutoSport Alex Logo" class="h-12 w-auto object-contain transition-transform group-hover:scale-105" />
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex space-x-1">
+        {navLinks.map((link) => (
+          <a
+            href={link.path}
+            class={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              isActive(link.path)
+                ? 'text-autosport-red bg-red-50'
+                : 'text-slate-600 hover:text-autosport-red hover:bg-slate-50'
+            }`}
+          >
+            {link.name}
+          </a>
+        ))}
+        <!-- Desktop CTA -->
+        <a 
+          href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`} 
+          class="ml-4 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-text-on-dark bg-autosport-navy-dark hover:bg-autosport-navy transition-colors"
+        >
+          Sună Acum
+        </a>
+      </nav>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center">
+        <button
+          type="button"
+          id="mobile-menu-btn"
+          class="inline-flex items-center justify-center p-2 rounded-md text-slate-600 hover:text-autosport-navy hover:bg-slate-100 focus:outline-none"
+          aria-expanded="false"
+        >
+          <span class="sr-only">Deschide meniul principal</span>
+          <!-- Icon Menu -->
+          <svg class="h-6 w-6 block" id="icon-menu" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <!-- Icon Close -->
+          <svg class="h-6 w-6 hidden" id="icon-close" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="md:hidden hidden bg-white border-b border-slate-200" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      {navLinks.map((link) => (
+        <a
+          href={link.path}
+          class={`block px-3 py-2 rounded-md text-base font-medium ${
+            isActive(link.path)
+              ? 'text-autosport-red bg-red-50'
+              : 'text-slate-700 hover:text-autosport-red hover:bg-slate-50'
+          }`}
+        >
+          {link.name}
+        </a>
+      ))}
+      <a 
+        href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`} 
+        class="block mt-4 w-full text-center px-4 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-text-on-dark bg-autosport-navy-dark hover:bg-autosport-navy"
+      >
+        Sună: {siteConfig.phone}
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Simple plain JS for mobile menu toggle
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const iconMenu = document.getElementById('icon-menu');
+    const iconClose = document.getElementById('icon-close');
+
+    if (btn && menu && iconMenu && iconClose) {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true' || false;
+        btn.setAttribute('aria-expanded', (!expanded).toString());
+        
+        menu.classList.toggle('hidden');
+        iconMenu.classList.toggle('hidden');
+        iconClose.classList.toggle('hidden');
+      });
+    }
+  });
+</script>

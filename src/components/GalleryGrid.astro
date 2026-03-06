@@ -1,0 +1,234 @@
+---
+// Generates a grid of images (using placeholder API for demo, to be replaced by actual images)
+// In Astro, typically we'd use Astro.glob() or import.meta.glob to read images from /public/gallery
+// For now we'll do an array of static paths that user can overwrite locally
+import { siteConfig } from '../content/site';
+
+import fs from 'node:fs';
+import path from 'node:path';
+
+interface Props {
+  limit?: number;
+  showTabs?: boolean;
+}
+
+const { limit = 30, showTabs = false } = Astro.props;
+
+let images = [];
+try {
+  const galleryDir = path.join(process.cwd(), 'public', 'gallery');
+  if (fs.existsSync(galleryDir)) {
+    const files = fs.readdirSync(galleryDir);
+    const imageFiles = files.filter(f => /\.(jpe?g|png|webp|gif|avif)$/i.test(f));
+    
+    // Sort by name if desired, or just map them
+    images = imageFiles.map((file, i) => ({
+      id: i,
+      url: `/gallery/${file}`,
+      thumb: `/gallery/${file}`,
+      alt: `AutoSport Alex Galerie Foto ${i + 1}`
+    }));
+  }
+} catch(e) {
+  console.error("Gallery read error", e);
+}
+
+// Fallback to placeholders if directory is empty (so the design still shows)
+if (images.length === 0) {
+  images = Array.from({ length: 12 }).map((_, i) => ({
+    id: i,
+    url: `/gallery/img-${i + 1}.jpg`,
+    thumb: `/gallery/thumb-${i + 1}.jpg`,
+    alt: `AutoSport Alex photo placeholder ${i + 1}`
+  }));
+}
+
+const displayImages = images.slice(0, limit);
+---
+
+<div class="gallery-wrapper" id="galerie">
+  {showTabs && (
+    <div class="flex justify-center mb-8 border-b border-slate-200 max-w-xl mx-auto">
+      <button class="gallery-tab active-tab px-6 py-3 font-semibold text-autosport-red border-b-2 border-autosport-red transition-colors" data-target="photo-grid">
+        Foto
+      </button>
+      <button class="gallery-tab px-6 py-3 font-semibold text-slate-500 hover:text-autosport-navy border-b-2 border-transparent transition-colors" data-target="video-grid">
+        Video
+      </button>
+    </div>
+  )}
+
+  <div id="photo-grid" class="tab-content block">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {displayImages.map((img, idx) => (
+        <button 
+          class="gallery-item group relative aspect-square bg-slate-100 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-autosport-red focus:ring-offset-2"
+          data-index={idx}
+          data-full={img.url}
+          aria-label={`Vezi imaginea mărită`}
+        >
+          <!-- Using a grey background as placeholder if image fails to load -->
+          <div class="absolute inset-0 bg-slate-200 animate-pulse -z-10 text-text-muted flex items-center justify-center text-xs">Așteptând imagine... (public/gallery)</div>
+          <img 
+            src={img.thumb || img.url} 
+            alt={img.alt}
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            onerror="this.style.display='none'"
+          />
+          <div class="absolute inset-0 bg-autosport-navy-dark/0 group-hover:bg-autosport-navy-dark/20 transition-colors duration-300 flex items-center justify-center">
+            <svg class="w-8 h-8 text-text-on-dark opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+          </div>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  {showTabs && (
+    <div id="video-grid" class="tab-content hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Mock up of video entries -->
+        {Array.from({ length: 3 }).map((_, i) => (
+          <div class="relative aspect-video bg-slate-900 rounded-xl overflow-hidden shadow-sm group">
+             <div class="absolute inset-0 flex items-center justify-center text-slate-500">Video placeholder (public/videos/..)</div>
+             <video 
+              class="w-full h-full object-cover relative z-10" 
+              controls 
+              preload="metadata"
+              poster={`/gallery/poster-${i+1}.jpg`}
+            >
+              <source src={`/videos/vid-${i + 1}.mp4`} type="video/mp4" />
+              Vizualizare video nu este suportată.
+            </video>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+</div>
+
+<!-- Modal Lightbox (Hidden by default) -->
+<div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300 flex flex-col items-center justify-center p-4">
+  <button id="lightbox-close" class="absolute top-6 right-6 text-text-on-dark/70 hover:text-text-on-dark p-2 rounded-full hover:bg-white/10 transition-colors" aria-label="Închide">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+  </button>
+  
+  <div class="relative flex items-center justify-center w-full h-full max-h-[85vh]">
+    <button id="lightbox-prev" class="absolute left-2 md:left-8 text-text-on-dark/50 hover:text-text-on-dark p-3 rounded-full hover:bg-white/10 transition-colors z-10" aria-label="Imaginea anterioară">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+    </button>
+    
+    <img id="lightbox-img" src="" alt="Imagine mărită" class="max-w-full max-h-full object-contain rounded-md shadow-2xl" />
+    
+    <button id="lightbox-next" class="absolute right-2 md:right-8 text-text-on-dark/50 hover:text-text-on-dark p-3 rounded-full hover:bg-white/10 transition-colors z-10" aria-label="Imaginea următoare">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+    </button>
+  </div>
+  
+  <div id="lightbox-counter" class="absolute bottom-6 font-medium text-text-on-dark/50 tracking-widest text-sm">
+    <span id="lb-current">1</span> / <span id="lb-total">{displayImages.length}</span>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Tabs Logic
+    const tabs = document.querySelectorAll('.gallery-tab');
+    if (tabs.length > 0) {
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          const targetId = (e.currentTarget as HTMLElement).getAttribute('data-target');
+          
+          // Reset tabs
+          tabs.forEach(t => {
+            t.classList.remove('active-tab', 'text-autosport-red', 'border-autosport-red');
+            t.classList.add('text-slate-500', 'border-transparent');
+          });
+          
+          // Set active tab
+          const activeTab = e.currentTarget as HTMLElement;
+          activeTab.classList.add('active-tab', 'text-autosport-red', 'border-autosport-red');
+          activeTab.classList.remove('text-slate-500', 'border-transparent');
+          
+          // Hide all content
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.replace('block', 'hidden'));
+          
+          // Show target content
+          const el = document.getElementById(targetId!);
+          if (el) el.classList.replace('hidden', 'block');
+        });
+      });
+    }
+
+    // Lightbox Logic
+    const items = document.querySelectorAll('.gallery-item');
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const lbClose = document.getElementById('lightbox-close');
+    const lbPrev = document.getElementById('lightbox-prev');
+    const lbNext = document.getElementById('lightbox-next');
+    const lbCurrent = document.getElementById('lb-current');
+    
+    let currentIndex = 0;
+    const images: string[] = [];
+    
+    items.forEach((item, idx) => {
+      images.push(item.getAttribute('data-full') || '');
+      item.addEventListener('click', () => {
+        currentIndex = idx;
+        openLightbox();
+      });
+    });
+
+    const openLightbox = () => {
+      if (!lightbox) return;
+      lbImg.src = images[currentIndex];
+      if (lbCurrent) lbCurrent.textContent = (currentIndex + 1).toString();
+      
+      lightbox.classList.remove('hidden');
+      // Trigger reflow
+      void lightbox.offsetWidth;
+      lightbox.classList.remove('opacity-0');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+      if (!lightbox) return;
+      lightbox.classList.add('opacity-0');
+      setTimeout(() => {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    };
+
+    const nextImage = () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      openLightbox();
+    };
+
+    const prevImage = () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      openLightbox();
+    };
+
+    if (lbClose) lbClose.addEventListener('click', closeLightbox);
+    if (lbNext) lbNext.addEventListener('click', nextImage);
+    if (lbPrev) lbPrev.addEventListener('click', prevImage);
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+      if (lightbox && !lightbox.classList.contains('hidden')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+      }
+    });
+
+    // Close on background click
+    if (lightbox) {
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+    }
+  });
+</script>

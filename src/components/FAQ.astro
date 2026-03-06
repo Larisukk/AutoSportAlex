@@ -1,0 +1,75 @@
+---
+import { faqs } from '../content/faq';
+---
+
+<section class="py-20 bg-slate-50 border-t border-slate-200" id="faq">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-autosport-red font-bold tracking-wide uppercase text-sm mb-2">Informații Uțile</h2>
+      <h3 class="text-3xl md:text-4xl font-extrabold text-autosport-navy">Întrebări Frecvente</h3>
+    </div>
+
+    <div class="space-y-4" id="faq-accordion">
+      {faqs.map((faq, index) => (
+        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden faq-item transition-all duration-300">
+          <button 
+            type="button"
+            class="faq-button w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
+            aria-expanded="false"
+          >
+            <span class="font-semibold text-slate-800 pr-4">{faq.question}</span>
+            <span class="faq-icon flex-shrink-0 text-autosport-red bg-red-50 w-8 h-8 rounded-full flex items-center justify-center transition-transform duration-300">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </button>
+          <div class="faq-content max-h-0 overflow-hidden transition-[max-height] duration-300 ease-in-out bg-slate-50">
+            <div class="px-6 pb-5 pt-2 text-slate-600 border-t border-slate-100 mt-2">
+              {faq.answer}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const faqButtons = document.querySelectorAll('.faq-button');
+    
+    faqButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        const content = button.nextElementSibling as HTMLElement;
+        const icon = button.querySelector('.faq-icon');
+        const item = button.closest('.faq-item');
+        
+        // Close all others
+        faqButtons.forEach(otherBtn => {
+          if (otherBtn !== button) {
+            otherBtn.setAttribute('aria-expanded', 'false');
+            const otherContent = otherBtn.nextElementSibling as HTMLElement;
+            otherContent.style.maxHeight = '0px';
+            otherBtn.querySelector('.faq-icon')?.classList.remove('rotate-180');
+            otherBtn.closest('.faq-item')?.classList.remove('border-autosport-red/30', 'ring-1', 'ring-autosport-red/30', 'shadow-md');
+          }
+        });
+
+        // Toggle current
+        if (!expanded) {
+          button.setAttribute('aria-expanded', 'true');
+          content.style.maxHeight = content.scrollHeight + 'px';
+          icon?.classList.add('rotate-180');
+          item?.classList.add('border-autosport-red/30', 'ring-1', 'ring-autosport-red/30', 'shadow-md');
+        } else {
+          button.setAttribute('aria-expanded', 'false');
+          content.style.maxHeight = '0px';
+          icon?.classList.remove('rotate-180');
+          item?.classList.remove('border-autosport-red/30', 'ring-1', 'ring-autosport-red/30', 'shadow-md');
+        }
+      });
+    });
+  });
+</script>

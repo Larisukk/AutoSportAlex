@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --color-autosport-navy-dark: #0B1B33;
+  --color-autosport-navy: #132A4A;
+  --color-autosport-red: #C81E2A;
+  --color-autosport-red-hover: #E02434;
+  --color-autosport-surface: rgba(255, 255, 255, 0.06);
+  --color-autosport-border: rgba(255, 255, 255, 0.10);
+  --color-text-on-dark: #EAF0FF;
+  --color-text-muted: rgba(234, 240, 255, 0.72);
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased text-slate-800 bg-slate-50;
+  }
+}

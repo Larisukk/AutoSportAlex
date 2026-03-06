@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import GalleryGrid from '../components/GalleryGrid.astro';
+---
+
+<Layout title="Galerie Foto / Video" description="Imagini și clipuri din timpul orelor de pregătire auto la școala de șoferi AutoSport Alex.">
+  <div class="bg-autosport-navy-dark py-16 border-b border-autosport-border relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 bg-[linear-gradient(45deg,#ffffff_1px,transparent_1px),linear-gradient(-45deg,#ffffff_1px,transparent_1px)] bg-[length:20px_20px]"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-text-on-dark mb-4">Galerie</h1>
+      <p class="text-xl text-text-muted max-w-2xl mx-auto">Imagini din timpul activității noastre, autoturismele școlii și poligonul moto.</p>
+    </div>
+  </div>
+
+  <section class="py-16 bg-white min-h-[60vh]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <GalleryGrid limit={30} showTabs={true} />
+    </div>
+  </section>
+  
+  <section class="py-12 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-slate-600 mb-6">Ai văzut cum lucrăm. Ești pregătit să ne cunoști personal?</p>
+      <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 border border-slate-300 rounded-lg text-autosport-navy font-bold hover:bg-autosport-navy hover:border-autosport-navy hover:text-white transition-colors">
+        Programează o vizită la sediu
+      </a>
+    </div>
+  </section>
+</Layout>
