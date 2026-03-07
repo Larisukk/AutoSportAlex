@@ -21,6 +21,9 @@ import { siteConfig } from '../content/site';
     <!-- Carousel Container -->
     <div class="relative group">
       <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 gap-6" id="reviews-slider">
+        <!-- Spacer for left side -->
+        <div class="shrink-0 w-2 lg:w-16"></div>
+        
         {reviews.map((review) => (
           <div class="snap-center shrink-0 w-[85vw] sm:w-[500px] bg-autosport-surface hover:bg-white/10 rounded-2xl p-8 border border-autosport-border flex flex-col">
             <div class="flex items-center mb-6">
@@ -51,6 +54,9 @@ import { siteConfig } from '../content/site';
             </div>
           </div>
         ))}
+        
+        <!-- Spacer for right side -->
+        <div class="shrink-0 w-2 lg:w-16"></div>
       </div>
       
       <!-- Navigation Buttons -->
