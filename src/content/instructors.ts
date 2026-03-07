@@ -9,45 +9,39 @@ export interface Instructor {
 
 export const instructors: Instructor[] = [
     {
-        id: "alina-truica",
-        name: "Truica Alina",
+        id: "truica-alina",
+        name: "Truică Alina",
         role: "Profesor Legislație Rutieră",
         quote: "Împreună vom desluși tainele legislației rutiere.",
         categories: ["Legislatie"]
     },
     {
-        id: "sandu-truica",
-        name: "Truica Sandu",
+        id: "truica-sandu",
+        name: "Truică Sandu",
         role: "Instructor auto",
         categories: ["B"]
     },
     {
         id: "marian-capatina",
-        name: "Capatina Marian",
+        name: "Căpățînă Marian",
         role: "Instructor auto",
         categories: ["B", "C", "CE"]
     },
     {
-        id: "tudorel-focaru",
+        id: "focaru-tudorel",
         name: "Focaru Tudorel",
         role: "Instructor auto",
         categories: ["B"]
     },
     {
-        id: "ionel-radoi",
-        name: "Radoi Ionel",
+        id: "radoi-ionel",
+        name: "Rădoi Ionel",
         role: "Instructor auto",
         categories: ["B"]
     },
     {
-        id: "gabriel-lujeru",
+        id: "lujeru-gabriel",
         name: "Lujeru Gabriel",
-        role: "Instructor auto",
-        categories: ["B"]
-    },
-    {
-        id: "marian-barbu",
-        name: "Barbu Marian",
         role: "Instructor auto",
         categories: ["B"]
     }

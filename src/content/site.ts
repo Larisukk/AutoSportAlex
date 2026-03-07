@@ -14,7 +14,7 @@ export const siteConfig = {
     lng: 24.3717122
   },
   socials: {
-    facebook: "#",
+    facebook: "https://www.facebook.com/profile.php?id=100083213776306",
     instagram: "#"
   }
 };

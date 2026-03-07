@@ -4,42 +4,42 @@ import { instructors } from '../content/instructors';
 ---
 
 <Layout title="Echipa de Instructori" description="Cunoaște echipa de instructori auto de la AutoSport Alex. Profesioniști calmi, dedicați succesului tău.">
-  <div class="bg-autosport-navy-dark py-16 border-b border-autosport-border relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10 bg-[linear-gradient(45deg,#ffffff_1px,transparent_1px),linear-gradient(-45deg,#ffffff_1px,transparent_1px)] bg-[length:20px_20px]"></div>
+  <div class="bg-autosport-navy-dark py-6 border-b border-autosport-border relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 bg-[linear-gradient(45deg,#ffffff_1px,transparent_1px),linear-gradient(-45deg,#ffffff_1px,transparent_1px)] bg-[length:10px_10px]"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-      <h1 class="text-4xl md:text-5xl font-extrabold text-text-on-dark mb-4">Instructorii Noștri</h1>
-      <p class="text-xl text-text-muted max-w-2xl mx-auto">Experiență de top. Calm garantat.</p>
+      <h1 class="text-2xl md:text-3xl font-extrabold text-text-on-dark mb-1">Instructorii Noștri</h1>
+      <p class="text-base text-text-muted max-w-2xl mx-auto">Experiență de top. Calm garantat.</p>
     </div>
   </div>
 
-  <section class="py-20 bg-slate-50">
+  <section class="py-8 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Special card for Legislation Professor if present, or just general grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {instructors.map((instructor) => (
           <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
             
-            <div class="aspect-[4/3] bg-gradient-to-br from-autosport-navy-dark to-autosport-navy flex items-center justify-center p-6 relative">
+            <div class="h-32 bg-gradient-to-br from-autosport-navy-dark to-autosport-navy flex items-center justify-center p-5 relative">
               <!-- Initials Fallback if no image -->
-              <div class="w-24 h-24 rounded-full bg-white text-autosport-red font-bold text-3xl flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300 z-10">
+              <div class="w-20 h-20 rounded-full bg-white text-autosport-red font-bold text-2xl flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300 z-10">
                 {instructor.name.split(' ').map(n => n[0]).join('')}
               </div>
               <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/50 to-transparent"></div>
             </div>
             
-            <div class="p-6 flex-grow flex flex-col">
-              <h3 class="text-xl font-extrabold text-autosport-navy mb-1">{instructor.name}</h3>
-              <p class="text-autosport-red font-medium text-sm mb-4">{instructor.role}</p>
+            <div class="p-5 flex-grow flex flex-col">
+              <h3 class="text-lg font-extrabold text-autosport-navy mb-1">{instructor.name}</h3>
+              <p class="text-autosport-red font-medium text-sm mb-3">{instructor.role}</p>
               
               {instructor.quote && (
-                <blockquote class="italic text-slate-500 text-sm mb-6 border-l-2 border-autosport-red pl-3 mt-auto">
+                <blockquote class="italic text-slate-500 text-sm mb-5 border-l-2 border-autosport-red pl-3 mt-auto">
                   "{instructor.quote}"
                 </blockquote>
               )}
               
-              <div class="mt-auto pt-6 border-t border-slate-100">
-                <span class="block text-xs uppercase tracking-wider text-text-muted font-semibold mb-2">Categorii predate:</span>
-                <div class="flex flex-wrap gap-2">
+              <div class="mt-auto pt-5 border-t border-slate-100">
+                <span class="block text-xs uppercase tracking-wider text-slate-500 font-semibold mb-2">Categorii predate:</span>
+                <div class="flex flex-wrap gap-1.5">
                   {instructor.categories.map((cat) => (
                     <span class="px-2.5 py-1 bg-slate-100 text-slate-700 text-xs font-bold rounded-md">
                       {cat === "Legislatie" ? "Legislație" : `Cat. ${cat}`}
