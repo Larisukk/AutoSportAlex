@@ -1,3 +1,4 @@
+
 export interface Instructor {
     id: string;
     name: string;
@@ -13,7 +14,8 @@ export const instructors: Instructor[] = [
         name: "Truică Alina",
         role: "Profesor Legislație Rutieră",
         quote: "Împreună vom desluși tainele legislației rutiere.",
-        categories: ["Legislatie"]
+        categories: ["Legislatie"],
+        imageUrl: "/images/instructors/alina.webp"
     },
     {
         id: "truica-sandu",
@@ -25,7 +27,7 @@ export const instructors: Instructor[] = [
         id: "marian-capatina",
         name: "Căpățînă Marian",
         role: "Instructor auto",
-        categories: ["B", "C", "CE"]
+        categories: ["A", "B", "C", "CE"]
     },
     {
         id: "focaru-tudorel",

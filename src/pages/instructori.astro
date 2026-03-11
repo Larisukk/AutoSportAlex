@@ -20,10 +20,14 @@ import { instructors } from '../content/instructors';
           <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col group">
             
             <div class="h-32 bg-gradient-to-br from-autosport-navy-dark to-autosport-navy flex items-center justify-center p-5 relative">
-              <!-- Initials Fallback if no image -->
-              <div class="w-20 h-20 rounded-full bg-white text-autosport-red font-bold text-2xl flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform duration-300 z-10">
-                {instructor.name.split(' ').map(n => n[0]).join('')}
-              </div>
+              <!-- Instructor Photo or Initials Fallback -->
+              {instructor.imageUrl ? (
+                <img src={instructor.imageUrl} alt={`Foto ${instructor.name}`} class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-lg transform group-hover:scale-110 transition-transform duration-300 z-10" />
+              ) : (
+                <div class="w-20 h-20 rounded-full bg-white text-autosport-red font-bold text-2xl flex items-center justify-center border-2 border-white shadow-lg transform group-hover:scale-110 transition-transform duration-300 z-10">
+                  {instructor.name.split(' ').map(n => n[0]).join('')}
+                </div>
+              )}
               <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/50 to-transparent"></div>
             </div>
             
@@ -49,6 +53,29 @@ import { instructors } from '../content/instructors';
               </div>
             </div>
             
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-extrabold text-autosport-navy mb-4">Galerie Foto</h2>
+        <p class="text-slate-500 max-w-2xl mx-auto">Câteva momente din activitatea instructorilor noștri.</p>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[27, 28, 29, 30, 31, 32, 33, 34].map((num) => (
+          <div class="rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 relative group aspect-video md:aspect-square">
+            <img 
+              src={`/gallery/gallery-${num}.webp`} 
+              alt={`Moment din activitatea auto ${num}`} 
+              class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
           </div>
         ))}
       </div>
