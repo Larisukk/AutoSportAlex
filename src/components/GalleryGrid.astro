@@ -1,11 +1,5 @@
 ---
-// Generates a grid of images (using placeholder API for demo, to be replaced by actual images)
-// In Astro, typically we'd use Astro.glob() or import.meta.glob to read images from /public/gallery
-// For now we'll do an array of static paths that user can overwrite locally
 import { siteConfig } from '../content/site';
-
-import fs from 'node:fs';
-import path from 'node:path';
 
 interface Props {
   limit?: number;
@@ -14,26 +8,21 @@ interface Props {
 
 const { limit = 30, showTabs = false } = Astro.props;
 
-let images = [];
-try {
-  const galleryDir = path.join(process.cwd(), 'public', 'gallery');
-  if (fs.existsSync(galleryDir)) {
-    const files = fs.readdirSync(galleryDir);
-    const imageFiles = files.filter(f => /\.(jpe?g|png|webp|gif|avif)$/i.test(f));
-    
-    // Sort by name if desired, or just map them
-    images = imageFiles.map((file, i) => ({
-      id: i,
-      url: `/gallery/${file}`,
-      thumb: `/gallery/${file}`,
-      alt: `AutoSport Alex Galerie Foto ${i + 1}`
-    }));
-  }
-} catch(e) {
-  console.error("Gallery read error", e);
-}
+// import.meta.glob runs at BUILD TIME — no node:fs needed, works on Cloudflare Workers
+const globImports = import.meta.glob('/public/gallery/*.{jpg,jpeg,png,webp,gif,avif}', { eager: true, as: 'url' });
 
-// Fallback to placeholders if directory is empty (so the design still shows)
+let images = Object.keys(globImports).map((filePath, i) => {
+  const filename = filePath.replace('/public/gallery/', '');
+  const url = `/gallery/${filename}`;
+  return {
+    id: i,
+    url,
+    thumb: url,
+    alt: `AutoSport Alex Galerie Foto ${i + 1}`
+  };
+});
+
+// Fallback if no images found
 if (images.length === 0) {
   images = Array.from({ length: 12 }).map((_, i) => ({
     id: i,
