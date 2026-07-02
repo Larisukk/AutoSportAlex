@@ -21,13 +21,13 @@ export const instructors: Instructor[] = [
         id: "truica-sandu",
         name: "Truică Sandu",
         role: "Instructor auto",
-        categories: ["B"]
+        categories: ["B", "C", "CE"]
     },
     {
-        id: "marian-capatina",
-        name: "Căpățînă Marian",
+        id: "capatina-marius-daniel",
+        name: "Căpățînă Marius Daniel",
         role: "Instructor auto",
-        categories: ["A", "B", "C", "CE"]
+        categories: ["A", "A1", "A2", "B", "C", "CE"]
     },
     {
         id: "focaru-tudorel",

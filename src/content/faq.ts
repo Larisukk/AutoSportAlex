@@ -13,7 +13,7 @@ export const faqs: FAQItem[] = [
     {
         id: "faq2",
         question: "Cât durează cursurile pentru școala de șoferi?",
-        answer: "Durata este de cel puțin 4 săptămâni, cuprinzând orele de legislație teoretică și minim 30 de ore de conducere practică pentru Categoria B."
+        answer: "Durata este de cel puțin 4 săptămâni, cuprinzând orele de legislație teoretică și minim 15 ședințe de conducere practică pentru Categoria B."
     },
     {
         id: "faq3",

@@ -27,7 +27,7 @@ export const categories: Category[] = [
     {
         id: "cat-a",
         name: "Categoria A, A1, A2",
-        title: "Permis Moto Categoriile A",
+        title: "Permis Moto Categoriile A, A1, A2",
         description: "Cursuri practice și teoretice pentru pasionații de motociclete din toate categoriile.",
         forWho: "Pasionați de două roți, vârsta minimă diferă în funcție de subcategorie.",
         icon: "motorcycle"

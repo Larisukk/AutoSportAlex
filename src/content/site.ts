@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Școala AutoSport Alex",
   shortName: "AutoSport Alex",
-  description: "Școală de șoferi în Slatina. Instructori cu experiență pentru categoriile B, C, CE și altele. Pregătire completă teoretică și practică.",
+  description: "Școală de șoferi în Slatina. Instructori cu experiență pentru categoriile A, A1, A2, B, C, CE și altele. Pregătire completă teoretică și practică.",
   address: "IZVORULUI NR. 11A",
   city: "Slatina",
   country: "Romania",

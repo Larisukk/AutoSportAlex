@@ -9,7 +9,7 @@ interface Props {
 const { limit = 30, showTabs = false } = Astro.props;
 
 // import.meta.glob runs at BUILD TIME — no node:fs needed, works on Cloudflare Workers
-const globImports = import.meta.glob('/public/gallery/*.{jpg,jpeg,png,webp,gif,avif}', { eager: true, as: 'url' });
+const globImports = import.meta.glob('/public/gallery/*.{jpg,jpeg,png,webp,gif,avif}', { eager: true, query: '?url', import: 'default' });
 
 let images = Object.keys(globImports).map((filePath, i) => {
   const filename = filePath.replace('/public/gallery/', '');
